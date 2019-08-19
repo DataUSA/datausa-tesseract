@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<Schema name="dataUSA_election">
+  <Cube name="Data_usa_election">
+    <Table name="Data_usa_election" schema="datausa"/>
+    <Dimension name="Geography">
+      <Hierarchy hasAll="true">
+        <Level column="geo_name" name="State"/>
+        <Level column="geo_id" name="Id"/>
+      </Hierarchy>
+    </Dimension>
+    <Dimension name="Candidate">
+      <Hierarchy hasAll="true">
+        <Level column="office" name="Office"/>
+        <Level column="candidate" name="Name"/>
+        <Level column="candidate_id" name="ID"/>
+        <Level column="party" name="Party"/>
+      </Hierarchy>
+    </Dimension>
+    <Dimension name="Year">
+      <Hierarchy hasAll="true">
+        <Level column="year" name="Year"/>
+      </Hierarchy>
+    </Dimension>
+    <Dimension name="Version">
+      <Hierarchy hasAll="true">
+        <Level column="version" name="Version"/>
+      </Hierarchy>
+    </Dimension>
+    <Measure aggregator="None" column="candidatevotes" name="Candidate_vote" visible="true"/>
+    <Measure aggregator="None" column="totalvotes" name="Total_vote" visible="true"/>
+  </Cube>
+</Schema>
