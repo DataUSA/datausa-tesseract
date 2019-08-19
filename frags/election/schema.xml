@@ -13,6 +13,10 @@
         <Level column="office" name="Office"/>
         <Level column="candidate" name="Name"/>
         <Level column="candidate_id" name="ID"/>
+      </Hierarchy>
+    </Dimension>
+    <Dimension name="Party">
+      <Hierarchy hasAll="true">
         <Level column="party" name="Party"/>
       </Hierarchy>
     </Dimension>
