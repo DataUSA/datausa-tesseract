@@ -235,7 +235,7 @@
   <Annotation name="source_name">Federal Election Commision</Annotation>
   <Annotation name="source_link">https://www.fec.gov/</Annotation>
   <Annotation name="available_dimensions">Geography, Party, Year</Annotation>
-    <Table name="electoralcollege" primary_key="geo_id"/>
+    <Table name="electoralcollege" primary_key="geoid"/>
 
     <Dimension name="Geography" foreign_key="geo_id" source="acs_test.shapes2017_states" default_hierarchy="Geography_State">
         <Hierarchy name="Geography_State" primary_key="geoid">
