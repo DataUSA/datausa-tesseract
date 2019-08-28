@@ -237,7 +237,7 @@
   <Annotation name="available_dimensions">Geography, Party, Year</Annotation>
     <Table name="electoralcollege" primary_key="geoid"/>
 
-    <Dimension name="Geography" foreign_key="geo_id" source="acs_test.shapes2017_states" default_hierarchy="Geography_State">
+    <Dimension name="Geography" foreign_key="geoid" source="acs_test.shapes2017_states" default_hierarchy="Geography_State">
         <Hierarchy name="Geography_State" primary_key="geoid">
             <Table name="acs_test.shapes2017_states" />
             <Level name="State" key_column="geoid" name_column="name" key_type="text"/>
