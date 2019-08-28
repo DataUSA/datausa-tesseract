@@ -259,10 +259,10 @@
     <Annotation name="dim_type">PARTY</Annotation>
     </Dimension>
 
-  </Cube>
+    <Measure name="Electoral College Votes" column="electoralvote" aggregator="sum" visible="true">
+      <Annotation name="unit_of_measurement">ELECTORAL VOTES</Annotation>
+    </Measure>
 
-  <Measure name="Electoral College Votes" column="electoralvote" aggregator="sum" visible="true">
-    <Annotation name="unit_of_measurement">ELECTORAL VOTES</Annotation>
-  </Measure>
+  </Cube>
 
 </Schema>
