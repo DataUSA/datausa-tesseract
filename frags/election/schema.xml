@@ -10,15 +10,15 @@
   <Annotation name="source_link">https://www.fec.gov/</Annotation>
   <Annotation name="available_dimensions">Candidate, Geography, Party, Year</Annotation>
   <Annotation name="hidden_dimensions">Version</Annotation>
-    <Table name="president_election" primary_key="candidate_id"/>
+    <Table name="election_president" primary_key="candidate_id"/>
 
     <Dimension name="Geography" foreign_key="geo_id" source="acs_test.shapes2017_states" default_hierarchy="Geography_State">
         <Hierarchy name="Geography_State" primary_key="geoid">
-            <Table name="acs_test.shapes2017_states" />
+            <Table name="acs_shapes2017_states" />
             <Level name="State" key_column="geoid" name_column="name" key_type="text"/>
         </Hierarchy>
         <Hierarchy name="Geography_County" primary_key="geoid">
-            <Table name="acs_test.shapes2017_counties" />
+            <Table name="acs_shapes2017_counties" />
             <Level name="County" key_column="geoid" name_column="name" key_type="text"/>
         </Hierarchy>
     <Annotation name="dim_type">GEOGRAPHY</Annotation>
@@ -74,11 +74,11 @@
   <Annotation name="source_link">https://www.fec.gov/</Annotation>
   <Annotation name="available_dimensions">Candidate, Geography, Party, Year, Candidate Other, Special</Annotation>
   <Annotation name="hidden_dimensions">Unofficial, Version</Annotation>
-    <Table name="senate_election" primary_key="candidate_id"/>
+    <Table name="election_senate" primary_key="candidate_id"/>
 
-    <Dimension name="Geography" foreign_key="geo_id" source="acs_test.shapes2017_states" default_hierarchy="Geography_State">
+    <Dimension name="Geography" foreign_key="geo_id" source="acs_shapes2017_states" default_hierarchy="Geography_State">
         <Hierarchy name="Geography_State" primary_key="geoid">
-            <Table name="acs_test.shapes2017_states" />
+            <Table name="acs_shapes2017_states" />
             <Level name="State" key_column="geoid" name_column="name" key_type="text"/>
         </Hierarchy>
     </Dimension>
@@ -152,7 +152,7 @@
   <Annotation name="source_link">https://www.fec.gov/</Annotation>
   <Annotation name="available_dimensions">Candidate, Geography, Party, Year, Candidate Other, Special</Annotation>
   <Annotation name="hidden_dimensions">Unofficial, Version</Annotation>
-    <Table name="house_election" primary_key="candidate_id"/>
+    <Table name="election_house" primary_key="candidate_id"/>
 
     <Dimension foreign_key="geo_id" name="Geography" source="house_election">
       <Hierarchy name="Congressional_District" primary_key="geo_id">
@@ -231,15 +231,19 @@
 
   </Cube>
 
-  <Cube name="Electoral College">
+  <Cube name="Data_USA_Electoral_College_president">
   <Annotation name="source_name">Federal Election Commision</Annotation>
   <Annotation name="source_link">https://www.fec.gov/</Annotation>
+  <Annotation name="dataset_name">Federal Elections 2016: Election Results for the U.S. President, the U.S. Senate, and the U.S. House of Representatives</Annotation>
+  <Annotation name="dataset_link">https://transition.fec.gov/pubrec/fe2016/federalelections2016.xlsx</Annotation>
+  <Annotation name="dataset_name">Federal Elections 2004: Election Results for the U.S. President, the U.S. Senate, and the U.S. House of Representatives</Annotation>
+  <Annotation name="dataset_link">https://transition.fec.gov/pubrec/fe2004/federalelections2004.xls</Annotation>
   <Annotation name="available_dimensions">Geography, Party, Year</Annotation>
-    <Table name="electoralcollege" primary_key="geoid"/>
+    <Table name="election_electoralcollege" primary_key="geoid"/>
 
-    <Dimension name="Geography" foreign_key="geoid" source="acs_test.shapes2017_states" default_hierarchy="Geography_State">
+    <Dimension name="Geography" foreign_key="geoid" source="acs_shapes2017_states" default_hierarchy="Geography_State">
         <Hierarchy name="Geography_State" primary_key="geoid">
-            <Table name="acs_test.shapes2017_states" />
+            <Table name="acs_shapes2017_states" />
             <Level name="State" key_column="geoid" name_column="name" key_type="text"/>
         </Hierarchy>
     </Dimension>
