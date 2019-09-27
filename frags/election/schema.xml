@@ -10,14 +10,15 @@
   <Annotation name="source_link">https://www.fec.gov/</Annotation>
   <Annotation name="available_dimensions">Candidate, Geography, Party, Year</Annotation>
   <Annotation name="hidden_dimensions">Version</Annotation>
+  <Annotation name="hide_in_ui">Version</Annotation>
     <Table name="election_president" primary_key="candidate_id"/>
 
-    <Dimension name="Geography" foreign_key="geo_id" source="acs_test.shapes2017_states" default_hierarchy="Geography_State">
-        <Hierarchy name="Geography_State" primary_key="geoid">
+    <Dimension type= "geo" name="Geography" foreign_key="geo_id" source="acs_shapes2017_states" default_hierarchy="Geography_State">
+        <Hierarchy name="State" primary_key="geoid">
             <Table name="acs_shapes2017_states" />
             <Level name="State" key_column="geoid" name_column="name" key_type="text"/>
         </Hierarchy>
-        <Hierarchy name="Geography_County" primary_key="geoid">
+        <Hierarchy name="County" primary_key="geoid">
             <Table name="acs_shapes2017_counties" />
             <Level name="County" key_column="geoid" name_column="name" key_type="text"/>
         </Hierarchy>
@@ -56,11 +57,11 @@
     </Dimension>
 
     <Measure name="Candidate Votes" column="candidatevotes" aggregator="sum" visible="true">
-      <Annotation name="unit_of_measurement">CANDIDATE VOTES</Annotation>
+      <Annotation name="units_of_measurement">VOTES</Annotation>
     </Measure>
 
     <Measure name="Total Votes" column="totalvotes" aggregator="max" visible="true">
-      <Annotation name="unit_of_measurement">TOTAL VOTES</Annotation>
+      <Annotation name="units_of_measurement">VOTES</Annotation>
     </Measure>
 
   </Cube>
@@ -74,13 +75,15 @@
   <Annotation name="source_link">https://www.fec.gov/</Annotation>
   <Annotation name="available_dimensions">Candidate, Geography, Party, Year, Candidate Other, Special</Annotation>
   <Annotation name="hidden_dimensions">Unofficial, Version</Annotation>
+  <Annotation name="hide_in_ui">Unofficial, Version</Annotation>
     <Table name="election_senate" primary_key="candidate_id"/>
 
-    <Dimension name="Geography" foreign_key="geo_id" source="acs_shapes2017_states" default_hierarchy="Geography_State">
-        <Hierarchy name="Geography_State" primary_key="geoid">
+    <Dimension type="geo" name="Geography" foreign_key="geo_id" source="acs_shapes2017_states" default_hierarchy="Geography_State">
+        <Hierarchy name="State" primary_key="geoid">
             <Table name="acs_shapes2017_states" />
             <Level name="State" key_column="geoid" name_column="name" key_type="text"/>
         </Hierarchy>
+    <Annotation name="dim_type">GEOGRAPHY</Annotation>
     </Dimension>
 
     <Dimension foreign_key="candidate_id" name="Candidate" source="senate_election">
@@ -134,11 +137,11 @@
     </Dimension>
 
     <Measure name="Candidate Votes" column="candidatevotes" aggregator="sum" visible="true">
-      <Annotation name="unit_of_measurement">CANDIDATE VOTES</Annotation>
+      <Annotation name="units_ofmeasurement">VOTES</Annotation>
     </Measure>
 
     <Measure name="Total Votes" column="totalvotes" aggregator="max" visible="true">
-      <Annotation name="unit_of_measurement">TOTAL VOTES</Annotation>
+      <Annotation name="units_ofmeasurement">VOTES</Annotation>
     </Measure>
 
   </Cube>
@@ -152,9 +155,10 @@
   <Annotation name="source_link">https://www.fec.gov/</Annotation>
   <Annotation name="available_dimensions">Candidate, Geography, Party, Year, Candidate Other, Special</Annotation>
   <Annotation name="hidden_dimensions">Unofficial, Version</Annotation>
+  <Annotation name="hide_in_ui">Unofficial, Version</Annotation>
     <Table name="election_house" primary_key="candidate_id"/>
 
-    <Dimension foreign_key="geo_id" name="Geography" source="house_election">
+    <Dimension type="geo" foreign_key="geo_id" name="Geography" source="house_election">
       <Hierarchy name="Congressional_District" primary_key="geo_id">
         <Level name="Congressional_District" key_column="geo_id" name_column="geo_name" key_type="text">
           <Property column="geo_id" name="FIPS"/>
@@ -222,11 +226,11 @@
     </Dimension>
 
     <Measure name="Candidate Votes" column="candidatevotes" aggregator="sum" visible="true">
-      <Annotation name="unit_of_measurement">CANDIDATE VOTES</Annotation>
+      <Annotation name="units_ofmeasurement">VOTES</Annotation>
     </Measure>
 
-    <Measure measure_type="unit_of_measurement" name="Total Votes" column="totalvotes" aggregator="max" visible="true">
-      <Annotation name="unit_of_measurement">TOTAL VOTES</Annotation>
+    <Measure measure_type="units_ofmeasurement" name="Total Votes" column="totalvotes" aggregator="max" visible="true">
+      <Annotation name="units_ofmeasurement">VOTES</Annotation>
     </Measure>
 
   </Cube>
@@ -241,11 +245,12 @@
   <Annotation name="available_dimensions">Geography, Party, Year</Annotation>
     <Table name="election_electoralcollege" primary_key="geoid"/>
 
-    <Dimension name="Geography" foreign_key="geoid" source="acs_shapes2017_states" default_hierarchy="Geography_State">
+    <Dimension type="geo" name="Geography" foreign_key="geoid" source="acs_shapes2017_states" default_hierarchy="Geography_State">
         <Hierarchy name="Geography_State" primary_key="geoid">
             <Table name="acs_shapes2017_states" />
             <Level name="State" key_column="geoid" name_column="name" key_type="text"/>
         </Hierarchy>
+    <Annotation name="dim_type">GEOGRAPHY</Annotation>
     </Dimension>
 
     <Dimension type="time" foreign_key="year" name="Year" source="electoralcollege">
@@ -264,7 +269,7 @@
     </Dimension>
 
     <Measure name="Electoral College Votes" column="electoralvote" aggregator="sum" visible="true">
-      <Annotation name="unit_of_measurement">ELECTORAL VOTES</Annotation>
+      <Annotation name="units_ofmeasurement">VOTES</Annotation>
     </Measure>
 
   </Cube>
