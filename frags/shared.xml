@@ -1,0 +1,19 @@
+<Schema name="Data_USA" default_locale="en">
+
+    <SharedDimension name="Date">
+        <Hierarchy name="Date" primary_key="date">
+          <Table name="dim_shared_date"/>
+          <Level name="Date" key_column="date" key_type="text">
+          </Level>
+        </Hierarchy>
+    </SharedDimension>
+
+    <SharedDimension name="State">
+        <Hierarchy name="State" primary_key="state_id">
+          <Table name="dim_shared_state"/>
+          <Level name="State" key_column="state_id" name_column="state" key_type="text">
+          </Level>
+        </Hierarchy>
+    </SharedDimension>
+
+</Schema>

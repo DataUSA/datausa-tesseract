@@ -1,0 +1,32 @@
+<Schema name="Data_USA" default_locale="en">
+    
+    <Cube name="bls_insurance_most_recent">
+    
+        <Annotation name="source_name">U.S Department of Labor</Annotation>
+        <Annotation name="source_link">https://www.dol.gov/</Annotation>
+        
+        <Table name="bls_insurance_most_recent" primary_key="week_ended" />
+    
+        <DimensionUsage foreign_key="week_ended" source="Date" name="Week Ended" />
+        <DimensionUsage foreign_key="reflecting_week_end" source="Date" name="Week Previous" />
+        <DimensionUsage foreign_key="fips_code" source="State" name="State" />
+    
+        <Measure name="Initial Claims" column="initial_claims" aggregator="sum">    
+            <Annotation name="details">Value</Annotation> 
+        </Measure>
+    
+        <Measure name="Continued Claims" column="continued_claims" aggregator="sum">
+            <Annotation name="details">Value</Annotation>
+        </Measure>
+
+        <Measure name="Covered Employment" column="covered_employment" aggregator="sum">    
+            <Annotation name="details">Value</Annotation> 
+        </Measure>
+
+        <Measure name="Insured Unemployment Rate" column="insured_unemployment_rate" aggregator="avg">    
+            <Annotation name="details">Rate</Annotation> 
+        </Measure>
+    
+    </Cube>
+    
+</Schema>
