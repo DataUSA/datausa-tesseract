@@ -1,4 +1,4 @@
-<Schema name="Data_USA" default_locale="en">
+<Schema name="datausa" default_locale="en">
 
     <SharedDimension name="Date">
         <Hierarchy name="Date" primary_key="date">
