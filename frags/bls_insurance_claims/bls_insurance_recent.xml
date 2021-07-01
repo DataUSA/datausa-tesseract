@@ -1,4 +1,4 @@
-<Schema name="Data_USA" default_locale="en">
+<Schema name="datausa" default_locale="en">
     
     <Cube name="bls_insurance_most_recent">
     
