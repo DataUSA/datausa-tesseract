@@ -1,5 +1,12 @@
 <Schema name="datausa" default_locale="en">
 
+    <SharedDimension name="Time">
+      <Hierarchy name="Time" primary_key="time_id" >
+        <Table name="dim_time"/>
+        <Level name="Month of Year" key_column="time_id" name_column="month_name" key_type="text"/>
+      </Hierarchy>
+    </SharedDimension>
+
     <SharedDimension name="Date">
         <Hierarchy name="Date" primary_key="date">
           <Table name="dim_shared_date"/>

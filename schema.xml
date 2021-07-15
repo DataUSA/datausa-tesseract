@@ -1,5 +1,12 @@
 <Schema name="datausa">
-<SharedDimension name="Date">
+<SharedDimension name="Time">
+      <Hierarchy name="Time" primary_key="time_id" >
+        <Table name="dim_time"/>
+        <Level name="Month of Year" key_column="time_id" name_column="month_name" key_type="text"/>
+      </Hierarchy>
+    </SharedDimension>
+
+    <SharedDimension name="Date">
         <Hierarchy name="Date" primary_key="date">
           <Table name="dim_shared_date"/>
           <Level name="Date" key_column="date" key_type="text">
@@ -26,19 +33,23 @@
     
     <Table name="bls_industry_fact" />
 
-    <Dimension name="Time" foreign_key="time_id" >
+    <!--<Dimension name="Time" foreign_key="time_id" >
       <Hierarchy name="Time" primary_key="time_id" >
         <Table name="dim_time"/>
         <Level name="Month of Year" key_column="time_id" name_column="month_name" key_type="text"/>
       </Hierarchy>
-    </Dimension>
+    </Dimension>-->
 
-    <Dimension name="State" foreign_key="state_id" >
+    <DimensionUsage foreign_key="time_id" source="Time" name="Time" />
+
+    <!--<Dimension name="State" foreign_key="state_id" >
       <Hierarchy name="State" primary_key="state_id">
         <Table name="dim_state" />
         <Level name="State" key_column="state_id" name_column="state_name" key_type="text"/>
       </Hierarchy>
-    </Dimension>
+    </Dimension>-->
+
+    <DimensionUsage foreign_key="state_id" source="State" name="State" />
 
     <Dimension name="Industry" foreign_key="industry_id" >
       <Hierarchy name="Industry" primary_key="industry_id">
@@ -64,19 +75,23 @@
 
     <Table name="bls_supersector_fact" />
 
-    <Dimension name="Time" foreign_key="time_id" >
+    <!--<Dimension name="Time" foreign_key="time_id" >
       <Hierarchy name="Time" primary_key="time_id" >
         <Table name="dim_time"/>
         <Level name="Month of Year" key_column="time_id" name_column="month_name" key_type="text"/>
       </Hierarchy>
-    </Dimension>
+    </Dimension>-->
 
-    <Dimension name="State" foreign_key="state_id" >
+    <DimensionUsage foreign_key="time_id" source="Time" name="Time" />
+
+    <!--<Dimension name="State" foreign_key="state_id" >
       <Hierarchy name="State" primary_key="state_id">
         <Table name="dim_state" />
         <Level name="State" key_column="state_id" name_column="state_name" key_type="text"/>
       </Hierarchy>
-    </Dimension>
+    </Dimension>-->
+
+    <DimensionUsage foreign_key="state_id" source="State" name="State" />
 
     <Dimension name="Supersector" foreign_key="supersector_id" >
       <Hierarchy name="Supersector" primary_key="supersector_id">
