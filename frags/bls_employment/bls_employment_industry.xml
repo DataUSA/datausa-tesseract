@@ -17,12 +17,14 @@
       </Hierarchy>
     </Dimension>
 
-    <Dimension name="State" foreign_key="state_id" >
+    <!--<Dimension name="State" foreign_key="state_id" >
       <Hierarchy name="State" primary_key="state_id">
         <Table name="dim_state" />
         <Level name="State" key_column="state_id" name_column="state_name" key_type="text"/>
       </Hierarchy>
-    </Dimension>
+    </Dimension>-->
+
+    <DimensionUsage foreign_key="state_id" source="State" name="State" />
 
     <Dimension name="Industry" foreign_key="industry_id" >
       <Hierarchy name="Industry" primary_key="industry_id">
