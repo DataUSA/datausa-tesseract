@@ -1,27 +1,4 @@
 <Schema name="datausa">
-<SharedDimension name="Time">
-      <Hierarchy name="Time" primary_key="time_id" >
-        <Table name="dim_time"/>
-        <Level name="Month of Year" key_column="time_id" name_column="month_name" key_type="text"/>
-      </Hierarchy>
-    </SharedDimension>
-
-    <SharedDimension name="Date">
-        <Hierarchy name="Date" primary_key="date">
-          <Table name="dim_shared_date"/>
-          <Level name="Date" key_column="date" key_type="text">
-          </Level>
-        </Hierarchy>
-    </SharedDimension>
-
-    <SharedDimension name="State">
-        <Hierarchy name="State" primary_key="state_id">
-          <Table name="dim_shared_state"/>
-          <Level name="State" key_column="state_id" name_column="state" key_type="text">
-          </Level>
-        </Hierarchy>
-    </SharedDimension>
-
 <Cube name="BLS Employment - Industry Only" >
     
     <Annotation name="source_name">Bureau of Labor Statistics</Annotation>
@@ -33,23 +10,19 @@
     
     <Table name="bls_industry_fact" />
 
-    <!--<Dimension name="Time" foreign_key="time_id" >
+    <Dimension name="Time" foreign_key="time_id" >
       <Hierarchy name="Time" primary_key="time_id" >
         <Table name="dim_time"/>
         <Level name="Month of Year" key_column="time_id" name_column="month_name" key_type="text"/>
       </Hierarchy>
-    </Dimension>-->
+    </Dimension>
 
-    <DimensionUsage foreign_key="time_id" source="Time" name="Time" />
-
-    <!--<Dimension name="State" foreign_key="state_id" >
-      <Hierarchy name="State" primary_key="state_id">
+    <Dimension name="Employment State" foreign_key="state_id" >
+      <Hierarchy name="Employment State" primary_key="state_id">
         <Table name="dim_state" />
-        <Level name="State" key_column="state_id" name_column="state_name" key_type="text"/>
+        <Level name="Employment State" key_column="state_id" name_column="state_name" key_type="text"/>
       </Hierarchy>
-    </Dimension>-->
-
-    <DimensionUsage foreign_key="state_id" source="State" name="State" />
+    </Dimension>
 
     <Dimension name="Industry" foreign_key="industry_id" >
       <Hierarchy name="Industry" primary_key="industry_id">
@@ -75,23 +48,19 @@
 
     <Table name="bls_supersector_fact" />
 
-    <!--<Dimension name="Time" foreign_key="time_id" >
+    <Dimension name="Time" foreign_key="time_id" >
       <Hierarchy name="Time" primary_key="time_id" >
         <Table name="dim_time"/>
         <Level name="Month of Year" key_column="time_id" name_column="month_name" key_type="text"/>
       </Hierarchy>
-    </Dimension>-->
+    </Dimension>
 
-    <DimensionUsage foreign_key="time_id" source="Time" name="Time" />
-
-    <!--<Dimension name="State" foreign_key="state_id" >
-      <Hierarchy name="State" primary_key="state_id">
+    <Dimension name="Employment State" foreign_key="state_id" >
+      <Hierarchy name="Employment State" primary_key="state_id">
         <Table name="dim_state" />
-        <Level name="State" key_column="state_id" name_column="state_name" key_type="text"/>
+        <Level name="Employment State" key_column="state_id" name_column="state_name" key_type="text"/>
       </Hierarchy>
-    </Dimension>-->
-
-    <DimensionUsage foreign_key="state_id" source="State" name="State" />
+    </Dimension>
 
     <Dimension name="Supersector" foreign_key="supersector_id" >
       <Hierarchy name="Supersector" primary_key="supersector_id">
@@ -106,16 +75,39 @@
     <Measure name="SA Average Employees" column="SA_employees" aggregator="avg" visible="true"/>
 
   </Cube>
-<Cube name="bls_insurance_claims">
+<Cube name="BLS Unemployment Insurance Claims">
     
         <Annotation name="source_name">U.S Department of Labor</Annotation>
         <Annotation name="source_link">https://www.dol.gov/</Annotation>
         
         <Table name="bls_insurance_claims" primary_key="week_ended" />
     
-        <DimensionUsage foreign_key="week_ended" source="Date" name="Week Ended" />
-        <DimensionUsage foreign_key="reflecting_week_end" source="Date" name="Week Previous" />
-        <DimensionUsage foreign_key="fips_code" source="State" name="State" />
+        <!--<DimensionUsage foreign_key="week_ended" source="Date" name="Week Ended" />-->
+
+        <Dimension name="Week Ended" foreign_key="week_ended">
+            <Hierarchy name="Week Ended" primary_key="date">
+                <Table name="dim_shared_date"/>
+                <Level name="Week Ended" key_column="date" key_type="text" />
+            </Hierarchy>
+        </Dimension>
+
+        <!--<DimensionUsage foreign_key="reflecting_week_end" source="Date" name="Week Previous" />-->
+
+        <Dimension name="Week Previous" foreign_key="reflecting_week_end">
+            <Hierarchy name="Week Previous" primary_key="date">
+                <Table name="dim_shared_date"/>
+                <Level name="Week Previous" key_column="date" key_type="text" />
+            </Hierarchy>
+        </Dimension>
+
+        <!--<DimensionUsage foreign_key="fips_code" source="State" name="State" />-->
+
+        <Dimension name="UIC State" foreign_key="fips_code">
+            <Hierarchy name="UIC State" primary_key="state_id">
+                <Table name="dim_shared_state"/>
+                <Level name="UIC State" key_column="state_id" name_column="state" key_type="text" />
+            </Hierarchy>
+        </Dimension>
     
         <Measure name="Initial Claims" column="initial_claims" aggregator="sum">    
             <Annotation name="details">Value</Annotation> 
@@ -135,16 +127,39 @@
     
     </Cube>
     
-<Cube name="bls_insurance_most_recent">
+<Cube name="BLS Unemployment Insurance Claims - Most Recent">
     
         <Annotation name="source_name">U.S Department of Labor</Annotation>
         <Annotation name="source_link">https://www.dol.gov/</Annotation>
         
         <Table name="bls_insurance_most_recent" primary_key="week_ended" />
     
-        <DimensionUsage foreign_key="week_ended" source="Date" name="Week Ended" />
-        <DimensionUsage foreign_key="reflecting_week_end" source="Date" name="Week Previous" />
-        <DimensionUsage foreign_key="fips_code" source="State" name="State" />
+        <!--<DimensionUsage foreign_key="week_ended" source="Date" name="Week Ended" />-->
+
+        <Dimension name="Week Ended" foreign_key="week_ended">
+            <Hierarchy name="Week Ended" primary_key="date">
+                <Table name="dim_shared_date"/>
+                <Level name="Week Ended" key_column="date" key_type="text" />
+            </Hierarchy>
+        </Dimension>
+
+        <!--<DimensionUsage foreign_key="reflecting_week_end" source="Date" name="Week Previous" />-->
+
+        <Dimension name="Week Previous" foreign_key="reflecting_week_end">
+            <Hierarchy name="Week Previous" primary_key="date">
+                <Table name="dim_shared_date"/>
+                <Level name="Week Previous" key_column="date" key_type="text" />
+            </Hierarchy>
+        </Dimension>
+
+        <!--<DimensionUsage foreign_key="fips_code" source="State" name="State" />-->
+
+        <Dimension name="UIC State" foreign_key="fips_code">
+            <Hierarchy name="UIC State" primary_key="state_id">
+                <Table name="dim_shared_state"/>
+                <Level name="UIC State" key_column="state_id" name_column="state" key_type="text" />
+            </Hierarchy>
+        </Dimension>
     
         <Measure name="Initial Claims" column="initial_claims" aggregator="sum">    
             <Annotation name="details">Value</Annotation> 

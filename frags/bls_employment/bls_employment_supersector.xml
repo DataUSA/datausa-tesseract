@@ -10,23 +10,19 @@
 
     <Table name="bls_supersector_fact" />
 
-    <!--<Dimension name="Time" foreign_key="time_id" >
+    <Dimension name="Time" foreign_key="time_id" >
       <Hierarchy name="Time" primary_key="time_id" >
         <Table name="dim_time"/>
         <Level name="Month of Year" key_column="time_id" name_column="month_name" key_type="text"/>
       </Hierarchy>
-    </Dimension>-->
+    </Dimension>
 
-    <DimensionUsage foreign_key="time_id" source="Time" name="Time" />
-
-    <!--<Dimension name="State" foreign_key="state_id" >
-      <Hierarchy name="State" primary_key="state_id">
+    <Dimension name="Employment State" foreign_key="state_id" >
+      <Hierarchy name="Employment State" primary_key="state_id">
         <Table name="dim_state" />
-        <Level name="State" key_column="state_id" name_column="state_name" key_type="text"/>
+        <Level name="Employment State" key_column="state_id" name_column="state_name" key_type="text"/>
       </Hierarchy>
-    </Dimension>-->
-
-    <DimensionUsage foreign_key="state_id" source="State" name="State" />
+    </Dimension>
 
     <Dimension name="Supersector" foreign_key="supersector_id" >
       <Hierarchy name="Supersector" primary_key="supersector_id">
