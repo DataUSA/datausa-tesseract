@@ -1,6 +1,6 @@
 <Schema name="datausa" default_locale="en">
     
-    <Cube name="BLS Unemployment Insurance Claims">
+    <Cube name="bls_unemployment_insurance_claims">
     
         <Annotation name="source_name">U.S Department of Labor</Annotation>
         <Annotation name="source_link">https://www.dol.gov/</Annotation>

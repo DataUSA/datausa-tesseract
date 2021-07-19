@@ -1,5 +1,5 @@
 <Schema name="datausa" default_locale="en">
-  <Cube name="BLS Employment - Supersector Only" >
+  <Cube name="bls_employment_supersector_only" >
 
     <Annotation name="source_name">Bureau of Labor Statistics</Annotation>
     <Annotation name="source_description">The Bureau of Labor Statistics (BLS) of the U.S. Department of Labor is the principal federal agency responsible for measuring labor market activity, working conditions, and price changes in the economy.</Annotation>
