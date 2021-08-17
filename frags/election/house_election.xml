@@ -1,10 +1,10 @@
 <Schema name="Data_USA" default_locale="en">
 
-    <Cube name="Data_USA_House_election">
+    <Cube name="election_house">
 
     <Annotation name="source_name">MIT Data Electionlab</Annotation>
     <Annotation name="source_link">https://electionlab.mit.edu/data</Annotation>
-    <Annotation name="dataset_name">1976-2018 House</Annotation>
+    <Annotation name="dataset_name">U.S House 1976-2020</Annotation>
     <Annotation name="dataset_link">https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/IG0UN2/8KAB8V</Annotation>
     <Annotation name="source_name">Federal Election Commision</Annotation>
     <Annotation name="source_link">https://www.fec.gov/</Annotation>
@@ -14,7 +14,7 @@
     
       <Table name="election_house" primary_key="candidate_id"/>
   
-      <Dimension type="geo" foreign_key="geo_id" name="Geography" source="house_election">
+      <Dimension type="geo" foreign_key="geo_id" name="Geography" source="election_house">
         <Hierarchy name="Congressional_District" primary_key="geo_id">
           <Level name="Congressional_District" key_column="geo_id" name_column="geo_name" key_type="text">
             <Property column="geo_id" name="FIPS"/>
@@ -24,7 +24,7 @@
         <Annotation name="dim_type">GEOGRAPHY</Annotation>
       </Dimension>
   
-      <Dimension foreign_key="candidate_id" name="Candidate" source="house_election">
+      <Dimension foreign_key="candidate_id" name="Candidate" source="election_house">
         <Hierarchy name="Candidate" primary_key="candidate_id">
           <Level name="Candidate" key_column="candidate_id" name_column="candidate" key_type="text">
             <Property name="Office" column="office"/>
@@ -33,49 +33,49 @@
       <Annotation name="dim_type">CANDIDATE</Annotation>
       </Dimension>
   
-      <Dimension foreign_key="candidate_other" name="Candidate Other" source="house_election">
+      <Dimension foreign_key="candidate_other" name="Candidate Other" source="election_house">
         <Hierarchy name="Candidate Other" primary_key="candidate_other">
           <Level key_column="candidate_other" name="Candidate Other" key_type="text"/>
         </Hierarchy>
       <Annotation name="dim_type">CANDIDATE OTHER</Annotation>
       </Dimension>
   
-      <Dimension foreign_key="party" name="Party" source="house_election">
+      <Dimension foreign_key="party" name="Party" source="election_house">
         <Hierarchy name="Party" primary_key="party">
           <Level key_column="party" name="Party" key_type="text"/>
         </Hierarchy>
       <Annotation name="dim_type">PARTY</Annotation>
       </Dimension>
   
-      <Dimension foreign_key="special" name="Special" source="house_election">
+      <Dimension foreign_key="special" name="Special" source="election_house">
         <Hierarchy name="Special" primary_key="special">
           <Level key_column="special" name="Special"/>
         </Hierarchy>
       <Annotation name="dim_type">SPECIAL</Annotation>
       </Dimension>
   
-      <Dimension foreign_key="runoff" name="Runoff" source="house_election">
+      <Dimension foreign_key="runoff" name="Runoff" source="election_house">
         <Hierarchy name="Runoff" primary_key="runoff">
           <Level key_column="runoff" name="Runoff"/>
         </Hierarchy>
       <Annotation name="dim_type">RUNOFF</Annotation>
       </Dimension>
   
-      <Dimension foreign_key="unofficial" name="Unofficial" source="house_election">
+      <Dimension foreign_key="unofficial" name="Unofficial" source="election_house">
         <Hierarchy name="Unofficial" primary_key="unofficial">
           <Level key_column="unofficial" name="Unofficial"/>
         </Hierarchy>
       </Dimension>
   
-      <Dimension  type="time" foreign_key="year" name="Year" source="house_election">
+      <Dimension  type="time" foreign_key="year" name="Year" source="election_house">
         <Hierarchy name="Year" primary_key="year">
           <Level key_column="year" name="Year"/>
         </Hierarchy>
       <Annotation name="dim_type">YEAR</Annotation>
-      <Annotation name="default_year">2016</Annotation>
+      <Annotation name="default_year">2020</Annotation>
       </Dimension>
   
-      <Dimension foreign_key="version" name="Version" source="house_election">
+      <Dimension foreign_key="version" name="Version" source="election_house">
         <Hierarchy name="Version" primary_key="version">
           <Level key_column="version" name="Version"/>
         </Hierarchy>
@@ -85,7 +85,7 @@
         <Annotation name="units_ofmeasurement">VOTES</Annotation>
       </Measure>
   
-      <Measure measure_type="units_ofmeasurement" name="Total Votes" column="totalvotes" aggregator="max" visible="true">
+      <Measure measure_type="units_ofmeasurement" name="Total Votes" column="totalvotes" aggregator="sum" visible="true">
         <Annotation name="units_ofmeasurement">VOTES</Annotation>
       </Measure>
   
