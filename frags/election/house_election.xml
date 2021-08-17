@@ -85,7 +85,7 @@
         <Annotation name="units_ofmeasurement">VOTES</Annotation>
       </Measure>
   
-      <Measure measure_type="units_ofmeasurement" name="Total Votes" column="totalvotes" aggregator="sum" visible="true">
+      <Measure measure_type="units_ofmeasurement" name="Total Votes" column="totalvotes" aggregator="max" visible="true">
         <Annotation name="units_ofmeasurement">VOTES</Annotation>
       </Measure>
   

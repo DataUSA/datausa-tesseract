@@ -70,7 +70,7 @@
         <Annotation name="units_ofmeasurement">VOTES</Annotation>
       </Measure>
 
-      <Measure name="Total Votes" column="total_votes" aggregator="sum" visible="true">
+      <Measure name="Total Votes" column="total_votes" aggregator="max" visible="true">
         <Annotation name="units_ofmeasurement">VOTES</Annotation>
       </Measure>
   
