@@ -1,0 +1,80 @@
+<Schema name="Data_USA" default_locale="en">
+
+    <Cube name="Data_USA_House_Compact_Election">
+
+    <Annotation name="source_name">MIT Data Electionlab</Annotation>
+    <Annotation name="source_link">https://electionlab.mit.edu/data</Annotation>
+    <Annotation name="dataset_name">1976-2018 House</Annotation>
+    <Annotation name="dataset_link">https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/IG0UN2/8KAB8V</Annotation>
+    <Annotation name="source_name">Federal Election Commision</Annotation>
+    <Annotation name="source_link">https://www.fec.gov/</Annotation>
+    <Annotation name="available_dimensions">Candidate, Geography, Party, Year, Candidate Other, Special</Annotation>
+    <Annotation name="hidden_dimensions">Unofficial, Version</Annotation>
+    <Annotation name="hide_in_ui">Unofficial, Version</Annotation>
+    
+      <Table name="election_house_compact" primary_key="winning_candidate"/>
+  
+      <Dimension type="geo" foreign_key="district" name="Geography" source="house_compact_election">
+        <Hierarchy name="Congressional_District" primary_key="district">
+          <Level name="Congressional_District" key_column="district" key_type="text"/>
+        </Hierarchy>
+        <Annotation name="dim_type">GEOGRAPHY</Annotation>
+      </Dimension>
+      
+      <Dimension  type="time" foreign_key="year" name="Year" source="house_compact_election">
+        <Hierarchy name="Year" primary_key="year">
+          <Level key_column="year" name="Year"/>
+        </Hierarchy>
+      <Annotation name="dim_type">YEAR</Annotation>
+      <Annotation name="default_year">2016</Annotation>
+      </Dimension>
+
+      <Dimension foreign_key="winning_candidate" name="Candidate" source="house_compact_election">
+        <Hierarchy name="Candidate" primary_key="winning_candidate">
+          <Level name="Candidate" key_column="winning_candidate" key_type="text"/>
+        </Hierarchy>
+      <Annotation name="dim_type">CANDIDATE</Annotation>
+      </Dimension>
+
+      <Dimension foreign_key="special" name="Special" source="house_compact_election">
+        <Hierarchy name="Special" primary_key="special">
+          <Level key_column="special" name="Special"/>
+        </Hierarchy>
+      <Annotation name="dim_type">SPECIAL</Annotation>
+      </Dimension>
+
+      <Dimension foreign_key="party" name="Party" source="house_compact_election">
+        <Hierarchy name="Party" primary_key="party">
+          <Level key_column="party" name="Party" key_type="text"/>
+        </Hierarchy>
+      <Annotation name="dim_type">PARTY</Annotation>
+      </Dimension>
+
+      <Dimension foreign_key="version" name="Version" source="house_compact_election">
+        <Hierarchy name="Version" primary_key="version">
+          <Level key_column="version" name="Version"/>
+        </Hierarchy>
+      </Dimension>
+
+      <Dimension foreign_key="runoff" name="Runoff" source="house_compact_election">
+        <Hierarchy name="Runoff" primary_key="runoff">
+          <Level key_column="runoff" name="Runoff"/>
+        </Hierarchy>
+      <Annotation name="dim_type">RUNOFF</Annotation>
+      </Dimension>
+
+      <Measure name="Winner Votes" column="winner_votes" aggregator="sum" visible="true">
+        <Annotation name="units_ofmeasurement">VOTES</Annotation>
+      </Measure>
+      
+      <Measure name="Other Votes" column="other_votes" aggregator="sum" visible="true">
+        <Annotation name="units_ofmeasurement">VOTES</Annotation>
+      </Measure>
+
+      <Measure name="Total Votes" column="total_votes" aggregator="sum" visible="true">
+        <Annotation name="units_ofmeasurement">VOTES</Annotation>
+      </Measure>
+  
+    </Cube>
+
+</Schema>
