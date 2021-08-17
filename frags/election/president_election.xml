@@ -16,13 +16,13 @@
       <Table name="election_president" primary_key="candidate_id"/>
   
       <Dimension type= "geo" name="Geography" foreign_key="geo_id" source="acs_shapes2017_states" default_hierarchy="State">
-          <Hierarchy name="State" primary_key="geo_id">
+          <Hierarchy name="State" primary_key="geoid">
               <Table name="acs_shapes2017_states" />
-              <Level name="State" key_column="geo_id" name_column="geo_name" key_type="text"/>
+              <Level name="State" key_column="geoid" name_column="name" key_type="text"/>
           </Hierarchy>
-          <Hierarchy name="County" primary_key="geo_id">
+          <Hierarchy name="County" primary_key="geoid">
               <Table name="acs_shapes2017_counties" />
-              <Level name="County" key_column="geo_id" name_column="geo_name" key_type="text"/>
+              <Level name="County" key_column="geoid" name_column="name" key_type="text"/>
           </Hierarchy>
       <Annotation name="dim_type">GEOGRAPHY</Annotation>
       </Dimension>
