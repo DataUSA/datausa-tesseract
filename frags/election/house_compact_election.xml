@@ -56,12 +56,6 @@
       <Annotation name="dim_type">RUNOFF</Annotation>
       </Dimension>
 
-      <Dimension foreign_key="version" name="Version" source="election_house_compact">
-        <Hierarchy name="Version" primary_key="version">
-          <Level key_column="version" name="Version"/>
-        </Hierarchy>
-      </Dimension>
-
       <Measure name="Winner Votes" column="winner_votes" aggregator="sum" visible="true">
         <Annotation name="units_ofmeasurement">VOTES</Annotation>
       </Measure>

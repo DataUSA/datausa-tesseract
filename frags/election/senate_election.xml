@@ -13,14 +13,8 @@
     <Annotation name="hide_in_ui">Unofficial, Version</Annotation>
     
       <Table name="election_senate" primary_key="candidate_id"/>
-  
-      <Dimension type="geo" name="Geography" foreign_key="geo_id" source="acs_shapes2017_states" default_hierarchy="State">
-          <Hierarchy name="State" primary_key="geoid">
-              <Table name="acs_shapes2017_states" />
-              <Level name="State" key_column="geoid" name_column="name" key_type="text"/>
-          </Hierarchy>
-      <Annotation name="dim_type">GEOGRAPHY</Annotation>
-      </Dimension>
+
+      <DimensionUsage name="State" source="State Election" foreign_key="geo_id" type="geo" />
   
       <Dimension foreign_key="candidate_id" name="Candidate" source="election_senate">
         <Hierarchy name="Candidate" primary_key="candidate_id">
@@ -64,12 +58,6 @@
         </Hierarchy>
       <Annotation name="dim_type">YEAR</Annotation>
       <Annotation name="default_year">2020</Annotation>
-      </Dimension>
-  
-      <Dimension foreign_key="version" name="Version" source="election_senate">
-        <Hierarchy name="Version" primary_key="version">
-          <Level key_column="version" name="Version"/>
-        </Hierarchy>
       </Dimension>
   
       <Measure name="Candidate Votes" column="candidatevotes" aggregator="sum" visible="true">
