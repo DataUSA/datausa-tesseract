@@ -25,4 +25,13 @@
       </Hierarchy>
     </SharedDimension>
 
+    <SharedDimension name="County Election">
+      <Hierarchy name="County" primary_key="geoid">
+        <Table name="counties_shapes2017"/>
+        <Level name="County" key_column="geoid" name_column="name" key_type="text">
+          <Annotation name="dim_type">GEOGRAPHY</Annotation>
+        </Level>
+      </Hierarchy>
+    </SharedDimension>
+
 </Schema>

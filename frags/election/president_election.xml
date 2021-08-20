@@ -15,13 +15,13 @@
     
       <Table name="election_president" primary_key="candidate_id"/>
   
-      <Dimension type= "geo" name="Geography" foreign_key="geo_id" source="acs_shapes2017_states" default_hierarchy="State">
+      <Dimension type= "geo" name="Geography" foreign_key="geo_id" source="states_shapes2017" default_hierarchy="State">
           <Hierarchy name="State" primary_key="geoid">
-              <Table name="acs_shapes2017_states" />
+              <Table name="states_shapes2017" />
               <Level name="State" key_column="geoid" name_column="name" key_type="text"/>
           </Hierarchy>
           <Hierarchy name="County" primary_key="geoid">
-              <Table name="acs_shapes2017_counties" />
+              <Table name="counties_shapes2017" />
               <Level name="County" key_column="geoid" name_column="name" key_type="text"/>
           </Hierarchy>
       <Annotation name="dim_type">GEOGRAPHY</Annotation>
@@ -50,12 +50,6 @@
           </Level>
         </Hierarchy>
       <Annotation name="dim_type">YEAR</Annotation>
-      </Dimension>
-  
-      <Dimension foreign_key="version" name="Version" source="election_president">
-        <Hierarchy name="Version" primary_key="version">
-          <Level key_column="version" name="Version"/>
-        </Hierarchy>
       </Dimension>
   
       <Measure name="Candidate Votes" column="candidatevotes" aggregator="sum" visible="true">
