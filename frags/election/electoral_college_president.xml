@@ -14,7 +14,7 @@
   
       <Dimension type="geo" name="Geography" foreign_key="geoid" source="acs_shapes2017_states" default_hierarchy="State">
           <Hierarchy name="Geography_State" primary_key="geoid">
-              <Table name="acs_shapes2017_states" />
+              <Table name="states_shapes2017" />
               <Level name="State" key_column="geoid" name_column="name" key_type="text"/>
           </Hierarchy>
       <Annotation name="dim_type">GEOGRAPHY</Annotation>
