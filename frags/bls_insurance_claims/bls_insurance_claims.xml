@@ -7,9 +7,21 @@
         
         <Table name="bls_insurance_claims" primary_key="week_ended" />
     
-        <DimensionUsage foreign_key="week_ended" source="Date" name="Week Ended" />
-        <DimensionUsage foreign_key="reflecting_week_end" source="Date" name="Week Previous" />
         <DimensionUsage foreign_key="fips_code" source="State" name="State" />
+
+        <Dimension name="Week Ended" foreign_key="week_ended">
+          <Hierarchy name="Week Ended" primary_key="date">
+              <Table name="dim_shared_date"/>
+              <Level name="Week Ended" key_column="date" key_type="text" />
+          </Hierarchy>
+        </Dimension>
+
+        <Dimension name="Week Previous" foreign_key="reflecting_week_end">
+          <Hierarchy name="Week Previous" primary_key="date">
+              <Table name="dim_shared_date"/>
+              <Level name="Week Previous" key_column="date" key_type="text" />
+          </Hierarchy>
+        </Dimension>
     
         <Measure name="Initial Claims" column="initial_claims" aggregator="sum">    
             <Annotation name="details">Value</Annotation> 
