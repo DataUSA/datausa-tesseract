@@ -13,7 +13,7 @@
     
       <Table name="election_house_compact" schema="election" primary_key="winning_candidate"/>
   
-      <Dimension type="geo" foreign_key="district" name="Geography" source="house_compact_election">
+      <Dimension type="geo" foreign_key="district" name="Geography" source="election_house_compact">
         <Hierarchy name="Congressional_District" primary_key="district">
           <Level name="Congressional_District" key_column="district" key_type="text"/>
         </Hierarchy>
