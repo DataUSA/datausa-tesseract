@@ -1,6 +1,6 @@
 <Schema name="Data_USA" default_locale="en">
 
-    <Cube name="election_senate">
+    <Cube name="Data_USA_Senate_election">
 
     <Annotation name="source_name">MIT Data Electionlab</Annotation>
     <Annotation name="source_link">https://electionlab.mit.edu/data</Annotation>
