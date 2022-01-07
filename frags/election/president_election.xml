@@ -15,19 +15,20 @@
     
       <Table name="election_president" primary_key="candidate_id"/>
   
-      <Dimension type= "geo" name="Geography" foreign_key="geo_id" default_hierarchy="Geography">
-          <Hierarchy name="Nation" primary_key="geoid">
-            <Table name="us_nation" />
-            <Level name="Nation" key_column="geoid" name_column="name" key_type="text"/>
-          </Hierarchy>
-          <Hierarchy name="State" primary_key="geoid">
-              <Table name="states_shapes2017" />
-              <Level name="State" key_column="geoid" name_column="name" key_type="text"/>
-          </Hierarchy>
-          <Hierarchy name="County" primary_key="geoid">
-              <Table name="counties_shapes2017" />
-              <Level name="County" key_column="geoid" name_column="name" key_type="text"/>
-          </Hierarchy>
+      <Dimension type= "geo" name="Geography" foreign_key="geo_id" default_hierarchy="Nation">
+        <Hierarchy hasAll="true" name="Nation">
+          <Table name="us_nation" />
+          <Level name="Nation" key_column="geoid" name_column="name" key_type="text"/>
+        </Hierarchy>
+        <Hierarchy hasAll="true" name="State">
+            <Table name="states_shapes2017" />
+            <Level name="State" key_column="geoid" name_column="name" key_type="text"/>
+        </Hierarchy>
+        <Hierarchy hasAll="true" name="County">
+            <Table name="counties_shapes2017" />
+            <Level name="State County" key_column="geoid" name_column="state_name" key_type="text"/>
+            <Level name="County" key_column="geoid" name_column="name" key_type="text"/>
+        </Hierarchy>
       <Annotation name="dim_type">GEOGRAPHY</Annotation>
       </Dimension>
   
