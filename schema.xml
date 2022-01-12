@@ -325,6 +325,47 @@
         </Measure>
     
       </Cube>
+
+      <Cube name="Data_USA_Electoral_College_president">
+
+        <Annotation name="source_name">Federal Election Commision</Annotation>
+        <Annotation name="source_link">https://www.fec.gov/</Annotation>
+        <Annotation name="dataset_name">Federal Elections 2016: Election Results for the U.S. President, the U.S. Senate, and the U.S. House of Representatives</Annotation>
+        <Annotation name="dataset_link">https://transition.fec.gov/pubrec/fe2016/federalelections2016.xlsx</Annotation>
+        <Annotation name="dataset_name">Federal Elections 2004: Election Results for the U.S. President, the U.S. Senate, and the U.S. House of Representatives</Annotation>
+        <Annotation name="dataset_link">https://transition.fec.gov/pubrec/fe2004/federalelections2004.xls</Annotation>
+        <Annotation name="available_dimensions">Geography, Party, Year</Annotation>
+        
+          <Table name="election_electoralcollege" primary_key="geoid"/>
+      
+          <Dimension type="geo" name="Geography" foreign_key="geoid" source="states_shapes2017">
+              <Hierarchy name="State" primary_key="geoid">
+                  <Table name="states_shapes2017" />
+                  <Level name="State" key_column="geoid" name_column="name" key_type="text"/>
+              </Hierarchy>
+          <Annotation name="dim_type">GEOGRAPHY</Annotation>
+          </Dimension>
+      
+          <Dimension type="time" foreign_key="year" name="Year" source="election_electoralcollege">
+            <Hierarchy name="Year" primary_key="year">
+              <Level key_column="year" name="Year"/>
+            </Hierarchy>
+          <Annotation name="dim_type">YEAR</Annotation>
+          <Annotation name="default_year">2020</Annotation>
+          </Dimension>
+      
+          <Dimension foreign_key="party" name="Party" source="election_electoralcollege">
+            <Hierarchy name="Party" primary_key="party">
+              <Level key_column="party" name="Party" key_type="text"/>
+            </Hierarchy>
+          <Annotation name="dim_type">PARTY</Annotation>
+          </Dimension>
+      
+          <Measure name="Electoral College Votes" column="electoralvote" aggregator="sum" visible="true">
+            <Annotation name="units_ofmeasurement">VOTES</Annotation>
+          </Measure>
+      
+        </Cube>
   
       <Cube name="BLS Unemployment Insurance Claims">
     
