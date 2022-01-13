@@ -261,15 +261,11 @@
     
       <Table name="election_house_compact" schema="election" primary_key="winning_candidate"/>
   
-      <Dimension type="geo" foreign_key="district" name="Geography" default_hierarchy="State">
-        <Hierarchy hasAll="true" name="State">
-          <Table name="congressionaldistrict" />
-          <Level name="State" key_column="geoid" name_column="state_name" key_type="text"/>
-        </Hierarchy>
-        <Hierarchy name="Congressional District" primary_key="geoid">
-          <Table name="congressionaldistrict" />
-          <Level name="State District" key_column="geoid" name_column="state_name" key_type="text"/>
-          <Level name="Congressional District" key_column="geoid" name_column="name" key_type="text"/>
+      <Dimension type="geo" foreign_key="state_id" name="Geography" default_hierarchy="State">
+        <Hierarchy name="Geography">
+          <Table name="dim_election_geo" />
+          <Level name="State" key_column="state_id" name_column="state_name" key_type="text"/>
+          <Level name="Congressional District" key_column="state_id" name_column="congressional_name" key_type="text"/>
         </Hierarchy>
         <Annotation name="dim_type">GEOGRAPHY</Annotation>
       </Dimension>
