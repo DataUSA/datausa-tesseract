@@ -214,7 +214,7 @@
         </Hierarchy>
         <Hierarchy hasAll="true" name="County">
             <Table name="counties_shapes2017" />
-            <Level name="State County" key_column="state_id" name_column="state_name" key_type="text"/>
+            <Level name="State" key_column="state_id" name_column="state_name" key_type="text"/>
             <Level name="County" key_column="geoid" name_column="name" key_type="text"/>
         </Hierarchy>
       <Annotation name="dim_type">GEOGRAPHY</Annotation>
