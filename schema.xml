@@ -332,10 +332,10 @@
       
         <Table name="election_electoralcollege" primary_key="geoid"/>
     
-        <Dimension type="geo" name="Geography" foreign_key="geoid" source="states_shapes2017">
-            <Hierarchy name="State" primary_key="geoid">
-                <Table name="states_shapes2017" />
-                <Level name="State" key_column="geoid" name_column="name" key_type="text"/>
+        <Dimension type="geo" name="Geography" foreign_key="geoid" >
+            <Hierarchy name="Geography" >
+                <Table name="dim_election_geo" />
+                <Level name="State" key_column="state_id" name_column="state_name" key_type="text"/>
             </Hierarchy>
         <Annotation name="dim_type">GEOGRAPHY</Annotation>
         </Dimension>
