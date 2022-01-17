@@ -13,11 +13,11 @@
     
       <Table name="election_house_compact" schema="election" primary_key="winning_candidate"/>
   
-      <Dimension type="geo" foreign_key="state_id" name="Geography" default_hierarchy="State">
+      <Dimension type="geo" foreign_key="district" name="Geography" default_hierarchy="State">
         <Hierarchy name="Geography">
           <Table name="dim_election_geo" />
           <Level name="State" key_column="state_id" name_column="state_name" key_type="text"/>
-          <Level name="Congressional District" key_column="state_id" name_column="congressional_name" key_type="text"/>
+          <Level name="Congressional District" key_column="congressional_id" name_column="congressional_name" key_type="text"/>
         </Hierarchy>
         <Annotation name="dim_type">GEOGRAPHY</Annotation>
       </Dimension>
