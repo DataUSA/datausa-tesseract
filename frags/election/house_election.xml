@@ -14,12 +14,11 @@
     
       <Table name="election_house" primary_key="candidate_id"/>
   
-      <Dimension type="geo" foreign_key="geo_id" name="Geography" source="election_house">
-        <Hierarchy name="Congressional_District" primary_key="geo_id">
-          <Level name="Congressional_District" key_column="geo_id" name_column="geo_name" key_type="text">
-            <Property column="geo_id" name="FIPS"/>
-            <Property column="geo_name" name="State"/>
-          </Level>
+      <Dimension type="geo" foreign_key="geo_id" name="Geography" default_hierarchy="State">
+        <Hierarchy name="Geography">
+          <Table name="dim_election_geo" />
+          <Level name="State" key_column="state_id" name_column="state_name" key_type="text"/>
+          <Level name="Congressional District" key_column="congressional_id" name_column="congressional_name" key_type="text"/>
         </Hierarchy>
         <Annotation name="dim_type">GEOGRAPHY</Annotation>
       </Dimension>

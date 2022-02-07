@@ -1,0 +1,14 @@
+{
+    "aliases": {
+        "cubes": [
+            {
+                "name": "Data_USA_President_election",
+                "levels": [
+                    {
+                        "current_name": "Geography.County.State",
+                        "unique_name": "State County"
+                    }                ]
+            }
+        ]
+    }
+}
