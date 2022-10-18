@@ -34,4 +34,65 @@
       </Hierarchy>
     </SharedDimension>
 
+    <SharedDimension name="Product or Service" default_hierarchy="Product Level 1">
+      <Annotation name="dim_type">Product or Service</Annotation>
+            
+        <Hierarchy name="Product Level 1">
+            <Table name="dim_cpi_level1" />
+            <Level key_column="level1_id" name="Level 1.1" name_column="level1_name" key_type="nontext"/>
+        </Hierarchy>
+
+        <Hierarchy name="Product Level 2">
+            <Table name="dim_cpi_level2" />
+            <Level key_column="level1_id" name="Level 2.1" name_column="level1_name" key_type="nontext"/>
+            <Level key_column="level2_id" name="Level 2.2" name_column="level2_name" key_type="nontext"/>   
+        </Hierarchy>
+
+        <Hierarchy name="Product Level 3">
+            <Table name="dim_cpi_level3" />
+            <Level key_column="level1_id" name="Level 3.1" name_column="level1_name" key_type="nontext"/>
+            <Level key_column="level2_id" name="Level 3.2" name_column="level2_name" key_type="nontext"/>
+            <Level key_column="level3_id" name="Level 3.3" name_column="level3_name" key_type="nontext"/>
+        </Hierarchy>
+
+        <Hierarchy name="Product Level 4">
+            <Table name="dim_cpi_level4" />
+            <Level key_column="level1_id" name="Level 4.1" name_column="level1_name" key_type="nontext"/>
+            <Level key_column="level2_id" name="Level 4.2" name_column="level2_name" key_type="nontext"/>
+            <Level key_column="level3_id" name="Level 4.3" name_column="level3_name" key_type="nontext"/>
+            <Level key_column="level4_id" name="Level 4.4" name_column="level4_name" key_type="nontext"/>
+        </Hierarchy>
+
+        <Hierarchy name="Product Level 5">
+            <Table name="dim_cpi_level5" />
+            <Level key_column="level1_id" name="Level 5.1" name_column="level1_name" key_type="nontext"/>
+            <Level key_column="level2_id" name="Level 5.2" name_column="level2_name" key_type="nontext"/>
+            <Level key_column="level3_id" name="Level 5.3" name_column="level3_name" key_type="nontext"/>
+            <Level key_column="level4_id" name="Level 5.4" name_column="level4_name" key_type="nontext"/>
+            <Level key_column="level5_id" name="Level 5.5" name_column="level5_name" key_type="nontext"/>
+        </Hierarchy>
+
+        <Hierarchy name="Product Level 6">
+            <Table name="dim_cpi_level6" />
+            <Level key_column="level1_id" name="Level 6.1" name_column="level1_name" key_type="nontext"/>
+            <Level key_column="level2_id" name="Level 6.2" name_column="level2_name" key_type="nontext"/>
+            <Level key_column="level3_id" name="Level 6.3" name_column="level3_name" key_type="nontext"/>
+            <Level key_column="level4_id" name="Level 6.4" name_column="level4_name" key_type="nontext"/>
+            <Level key_column="level5_id" name="Level 6.5" name_column="level5_name" key_type="nontext"/>
+            <Level key_column="level6_id" name="Level 6.6" name_column="level6_name" key_type="nontext"/>
+        </Hierarchy>
+
+        <Hierarchy name="Product Level 7">
+            <Table name="dim_cpi_level7" />
+            <Level key_column="level1_id" name="Level 7.1" name_column="level1_name" key_type="nontext"/>
+            <Level key_column="level2_id" name="Level 7.2" name_column="level2_name" key_type="nontext"/>
+            <Level key_column="level3_id" name="Level 7.3" name_column="level3_name" key_type="nontext"/>
+            <Level key_column="level4_id" name="Level 7.4" name_column="level4_name" key_type="nontext"/>
+            <Level key_column="level5_id" name="Level 7.5" name_column="level5_name" key_type="nontext"/>
+            <Level key_column="level6_id" name="Level 7.6" name_column="level6_name" key_type="nontext"/>
+            <Level key_column="level7_id" name="Level 7.7" name_column="level7_name" key_type="nontext"/>
+        </Hierarchy>
+
+    </SharedDimension>
+
 </Schema>

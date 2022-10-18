@@ -1,0 +1,31 @@
+<Schema name="Data_USA" default_locale="en">
+
+    <Cube name="Consumer Price Index - CPI" >
+    
+        <Annotation name="source_name">Bureau of Labor Statistics</Annotation>
+        <Annotation name="source_description">The Bureau of Labor Statistics (BLS) of the U.S. Department of Labor is the principal federal agency responsible for measuring labor market activity, working conditions, and price changes in the economy.</Annotation>
+        <Annotation name="dataset_name">Consumer Price Index (CPI)</Annotation>
+        <Annotation name="dataset_link">https://www.bls.gov/cpi/tables/supplemental-files/home.htm</Annotation>
+        <Annotation name="topic">Economy</Annotation>
+        <Annotation name="subtopic">Consumer Price</Annotation>
+        
+        <Table name="cpi_data" />
+
+        <Dimension name="Time" foreign_key="time_id" >
+          <Hierarchy name="Time" primary_key="time_id" >
+            <Table name="dim_months_cpi"/>
+            <Level name="Month and Year" key_column="time_id" name_column="month_name" key_type="text"/>
+          </Hierarchy>
+        </Dimension>
+
+        <DimensionUsage foreign_key="product_id" name="Product or Service" source="Product or Service">
+            <Annotation name="dim_type">Product or Service</Annotation>
+        </DimensionUsage>
+         
+        <Measure name="Consumer Price Inde" column="unadjusted_percent_change" aggregator="avg" visible="true"/>
+        <Measure name="Standard Error" column="standard_error" aggregator="avg" visible="true"/>
+        <Measure name="Percent Change" column="percent_change" aggregator="avg" visible="true"/>
+      
+    </Cube>
+
+</Schema>
