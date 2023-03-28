@@ -575,7 +575,7 @@
         <Measure name="Consumer Price Inde" column="unadjusted_percent_change" aggregator="avg" visible="true"/>
         <Measure name="Standard Error" column="standard_error" aggregator="avg" visible="true"/>
         <Measure name="Percent Change" column="percent_change" aggregator="avg" visible="true"/>
-    </Cube>
+  </Cube>
 
   <Cube name="BLS Employment - Supersector Only" >
     <Annotation name="source_name">Bureau of Labor Statistics</Annotation>
@@ -664,5 +664,152 @@
           <Annotation name="units_of_measurement">Rate</Annotation>
       </Measure>
   </Cube>
+  <Cube name="bea_use">
+        <Annotation name="source_name">Bureau of Economic Analysis</Annotation>
+        <Annotation name="source_link">https://bea.gov/</Annotation>
+        <Annotation name="topic">Economy</Annotation>
+        <Annotation name="subtopic">Industry Flows</Annotation>
+        <Annotation name="dataset_name">Use Tables</Annotation>
+        <Annotation name="dataset_link">https://www.bea.gov/industry/input-output-accounts-data</Annotation>
+        <Annotation name="source_description">The Bureau of Economic Analysis (BEA) publishes data on Input-Output, also called Make-Use, for industries in the United States. This Dataset is provided by the US Department of Commerce. Use of commodities by industry are valued at producers prices.</Annotation>
 
+        <Table name="bea_use" />
+
+        <Dimension name="Year" foreign_key="year">  
+            <Annotation name="dim_type">TIME</Annotation>
+            <Hierarchy name="Year" primary_key="Year">
+                <Level name="Year" key_column="year" key_type="nontext" />
+            </Hierarchy>
+        </Dimension>
+
+        <Dimension name="Industry IO Code" foreign_key="industry_iocode">
+            <Hierarchy  name="Industry IO Code" primary_key="industry_iocode">
+              <Level key_column="industry_iocode_parent" name_column="industry_iocode_parent_name" name="Industry L0" key_type="text" />
+              <Level key_column="industry_iocode" name_column="industry_iocode_description" name="Industry L1" key_type="text" />
+            </Hierarchy>
+        </Dimension>
+
+        <Dimension name="Commodity IO Code" foreign_key="commodity_iocode">
+            <Hierarchy name="Commodity IO Code" primary_key="commodity_iocode">
+              <Level key_column="commodity_iocode_parent" name_column="commodity_iocode_parent_name" name="Commodity L0" key_type="text"/>
+              <Level key_column="commodity_iocode" name_column="commodity_iocode_description" name="Commodity L1" key_type="text"/>
+            </Hierarchy>
+        </Dimension>
+
+        <Measure aggregator="sum" column="value_millions" name="Value Millions">
+            <Annotation name="units_of_measurement">USD</Annotation>
+        </Measure>
+  </Cube>
+  <Cube name="dot_faf">
+        <Annotation name="source_name">Department of Transportation Federal Highway Administration</Annotation>
+        <Annotation name="source_description">The Freight Analysis Framework (FAF), produced through a partnership between Bureau of Transportation Statistics (BTS) and Federal Highway Administration (FHWA), integrates data from a variety of sources to create a comprehensive picture of freight movement among states and major metropolitan areas by all modes of transportation. Starting with data from the 2012 Commodity Flow Survey (CFS) and international trade data from the Census Bureau, FAF incorporates data from agriculture, extraction, utility, construction, service, and other sectors. The FAF data give a picture of which goods are shipped from one region of the US to another region, according to type of commodity, mode of shipment, value, and weight.</Annotation>
+        <Annotation name="dataset_name">Freight Analysis Framework Domestic Flows</Annotation>
+        <Annotation name="dataset_link">https://ops.fhwa.dot.gov/freight/freight_analysis/faf/</Annotation>
+        <Annotation name="subtopic">Freight</Annotation>
+        <Annotation name="topic">Economy</Annotation>
+        <Annotation name="source_link">https://www.fhwa.dot.gov/</Annotation>
+    
+        <Table name="dot_faf" />
+
+        <Dimension name="Year" foreign_key="year">  
+            <Annotation name="dim_type">TIME</Annotation>
+            <Hierarchy name="Year" primary_key="Year">
+                <Level name="Year" key_column="year" key_type="nontext">
+                    <Property name="Year Base" column="year_base"/>
+                </Level>
+            </Hierarchy>
+        </Dimension>
+
+        <Dimension foreign_key="origin_region" name="Origin">
+            <Annotation name="dim_type">GEOGRAPHY</Annotation>
+          
+            <Hierarchy name="Origin" primary_key="region_id">
+                <Table name="faf_regions" />
+
+                <Level key_column="state_id" name_column="state_name" name="Origin State" key_type="text"/>
+                <Level key_column="region_id" name_column="region_name" name="Origin Region" key_type="text"/>
+            </Hierarchy>
+        </Dimension>
+
+        <Dimension foreign_key="destination_region" name="Destination">
+            <Annotation name="dim_type">GEOGRAPHY</Annotation>
+
+            <Hierarchy primary_key="region_id" name="Destination">
+                <Table name="faf_regions"/>
+
+                <Level key_column="state_id" name_column="state_name" name="Destination State" key_type="text"/>
+                <Level key_column="region_id" name_column="region_name" name="Destination Region" key_type="text"/>
+            </Hierarchy>
+        </Dimension>
+
+        <Dimension foreign_key="sctg" name="SCTG">
+            <Annotation name="dim_type">PRODUCT</Annotation>
+            <Hierarchy name="SCTG" primary_key="sctg_code">
+                <Table name="sctg" />
+                <Level key_column="sctg_code" name_column="sctg_name" name="SCTG2" key_type="text"/>
+            </Hierarchy>
+        </Dimension>
+
+        <Dimension foreign_key="mode" name="Transportation Mode">
+            <Annotation name="dim_type">GENERIC</Annotation>
+
+            <Hierarchy name="Transportation Mode">
+                <InlineTable alias="transportation_mode">
+                    <ColumnDef name="id" key_type="nontext" key_column_type="UInt8"/>
+                    <ColumnDef name="name" key_type="text"/>
+                    <ColumnDef name="description" key_type="text"/>
+    
+                    <Row>
+                      <Value column="id">1</Value>
+                      <Value column="name">Truck</Value>
+                      <Value column="description">Includes private and for-hire truck. Does not include truck that is part of Multiple Modes and Mail or truck moves in conjunction with domestic air cargo.</Value>
+                    </Row>
+                    <Row>
+                      <Value column="id">2</Value>
+                      <Value column="name">Rail</Value>
+                      <Value column="description">Includes any common carrier or private railroad. Does not include rail that is part of Multiple Modes and Mail. </Value>
+                    </Row>
+                    <Row>
+                      <Value column="id">3</Value>
+                      <Value column="name">Water</Value>
+                      <Value column="description">Includes shallow draft, deep draft, Great Lakes and intra-port shipments. Does not include water that is part of Multiple Modes and Mail.</Value>
+                    </Row>
+                    <Row>
+                      <Value column="id">4</Value>
+                      <Value column="name">Air (includes truck-air)</Value>
+                      <Value column="description">Includes shipments move by air or a combination of truck and air in commercial or private aircraft. Includes air freight and air express. In the case of imports and exports by air, domestic moves by ground to and from the port of entry or exit are categorized with Truck.</Value>
+                    </Row>
+                    <Row>
+                      <Value column="id">5</Value>
+                      <Value column="name">Multiple Modes and Mail</Value>
+                      <Value column="description">Includes shipments by multiple modes and by parcel delivery services, U.S. Postal Service, or couriers (capped at 150 pounds). This category is not limited to containerized or trailer-on-flatcar shipments.</Value>
+                    </Row>
+                    <Row>
+                      <Value column="id">6</Value>
+                      <Value column="name">Pipeline</Value>
+                      <Value column="description">Includes crude petroleum, natural gas, and product pipelines. Note: Does include flows from offshore wells to land which are counted as Water moves by the U.S. Army Corps of Engineers. Does not include pipeline that is part of Multiple Modes and Mail.</Value>
+                    </Row>
+                    <Row>
+                      <Value column="id">7</Value>
+                      <Value column="name">Other and Unknown</Value>
+                      <Value column="description">Includes movements not elsewhere classified such as flyaway aircraft, and shipments for which the mode cannot be determined.</Value>
+                    </Row>
+                </InlineTable>
+                <Level key_column="id" name="Transportation Mode" name_column="name" key_type="nontext">
+                    <Property name="Description" column="description"/>
+                </Level>
+            </Hierarchy>
+        </Dimension>
+
+        <Measure aggregator="sum" column="value_millions" name="Millions Of Dollars" visible="true">
+            <Annotation name="details">Value in millions of 2012 US Dollars.</Annotation>
+            <Annotation name="units_of_measurement">USD</Annotation>
+        </Measure>
+
+        <Measure aggregator="sum" column="thousand_tons" name="Thousands Of Tons" visible="true">
+            <Annotation name="details">Weight in thousands of tons.</Annotation>
+            <Annotation name="units_of_measurement">Thousands of Tons</Annotation>
+        </Measure>
+    </Cube>
+  
 </Schema>
