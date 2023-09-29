@@ -23,7 +23,7 @@
             <Annotation name="dim_type">Product or Service</Annotation>
         </DimensionUsage>
 
-        <Measure name="Consumer Price Inde" column="unadjusted_percent_change" aggregator="avg" visible="true"/>
+        <Measure name="Consumer Price Index" column="unadjusted_percent_change" aggregator="avg" visible="true"/>
         <Measure name="Standard Error" column="standard_error" aggregator="avg" visible="true"/>
         <Measure name="Percent Change" column="percent_change" aggregator="avg" visible="true"/>
     </Cube>
